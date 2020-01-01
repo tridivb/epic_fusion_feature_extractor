@@ -155,7 +155,7 @@ TSN Configurations:
             raise ValueError('Unknown mode for freezing the model: {}'.format(freeze_mode))
 
     def forward(self, input):
-        concatenated = []
+        features = {}
         # Get the output for each modality
         for m in self.modality:
             if (m == 'RGB'):
@@ -173,11 +173,11 @@ TSN Configurations:
             base_out = base_model(input[m].view((-1, sample_len) + input[m].size()[-2:]))
 
             base_out = base_out.view(base_out.size(0), -1)
-            concatenated.append(base_out)
+            features[m] = base_out.clone().detach()
 
-        output = self.fusion_classification_net(concatenated)
+        # output = self.fusion_classification_net(concatenated)
         
-        return output
+        return features
 
     def _get_diff(self, input, keep_rgb=False):
         input_c = 3
