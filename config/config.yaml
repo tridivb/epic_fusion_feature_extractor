@@ -22,9 +22,9 @@ DATA:
   SAMPLING_RATE: 24000
   AUDIO_LENGTH: 1.279
   # List of videos to process
-  VID_LIST: "absolute/path/to/video/list/file.txt"
+  VID_LIST: "<absolute/path/to/video/list/file.txt>"
   # Output directory
-  OUT_DIR: "absolute/path/to/output/dir"
+  OUT_DIR: "<absolute/path/to/output/dir>"
 # Model Parameters
 MODEL:
   # Only supports BNInception for now

@@ -166,12 +166,10 @@ def main():
     args = parse_args()
 
     cfg = OmegaConf.load(args.cfg)
-    # print(cfg.pretty())
-    # print("----------------------------------------------------------")
+    print(cfg.pretty())
+    print("----------------------------------------------------------")
 
-    print(type(cfg))
-
-    # extract_features(cfg)
+    extract_features(cfg)
 
 
 if __name__ == "__main__":

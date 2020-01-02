@@ -19,8 +19,15 @@ Python >= 3.6\
 [Tqdm](https://github.com/tqdm/tqdm) \
 [PIL](https://pillow.readthedocs.io/en/stable/) \
 [Parse](https://pypi.org/project/parse/) \
-
+[librosa](https://librosa.github.io/librosa/) \
 \
+The requirement.txt file can be used to install the dependencies.
+```
+pip install -r requirements.txt
+```
+
+
+### Setting up the data
 We use the same pre-processing steps as the original authors and create the following hierarchy for the dataset files,
 
 ```
