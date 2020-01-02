@@ -134,3 +134,4 @@ dmypy.json
 # misc
 .vscode
 weights/
+config/*.local.yaml

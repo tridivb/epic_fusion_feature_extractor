@@ -55,6 +55,14 @@ def get_time_diff(start_time, end_time):
 
 
 def extract_features(cfg):
+    """
+    Helper function to extract and save features from epic fusion tbn model
+
+    Args
+    ----------
+    cfg: OmegaConf 
+        Config dictionary of parameters
+    """
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -158,9 +166,12 @@ def main():
     args = parse_args()
 
     cfg = OmegaConf.load(args.cfg)
-    print(cfg.pretty())
+    # print(cfg.pretty())
+    # print("----------------------------------------------------------")
 
-    extract_features(cfg)
+    print(type(cfg))
+
+    # extract_features(cfg)
 
 
 if __name__ == "__main__":

@@ -1,3 +1,6 @@
+# Source: https://github.com/ekazakos/temporal-binding-network
+# Modified for feature extraction
+
 from torch.utils.data import Dataset
 
 import librosa as lr
@@ -8,6 +11,23 @@ from parse import parse
 
 
 class VideoDataSet(Dataset):
+    """
+    Video Dataset class
+
+    Args
+    ----------
+    cfg: OmegaConf dict
+        Dictonary of config parameters
+    vid_id: str
+        Untrimmed Video Id
+    modality: list
+        List of modalities
+    transform: list, default = None
+        List of transforms to apply
+    use_audio_pickle: boolean, default = False
+        Flag to read audio from wav or pickle files
+    
+    """
     def __init__(
         self, cfg, vid_id, modality, transform=None, use_audio_pickle=False,
     ):
@@ -54,9 +74,34 @@ class VideoDataSet(Dataset):
         self.aud_sample = self._read_audio_sample()
 
     def __len__(self):
+        """
+        Get length of dataset
+        """
+
         return len(self.frame_indices)
 
     def _log_specgram(self, audio, window_size=10, step_size=5, eps=1e-6):
+        """
+        Helper function to create 2D audio spectogram from 1D audio sample
+
+        Args
+        ----------
+        audio: np.ndarray
+            1D array of untrimmed audio sample
+        window_size: int, default = 10
+            Temporal size in millisecond of window function for STFT
+        step_size: int, default = 5
+            Hop size in millisecond between each sample for STFT
+        eps: double, default = 1e-6
+            Correction term to prevent divide by zero
+        
+        Returns
+        ----------
+        spec: np.ndarray
+            Array of audio spectrogram
+
+        """
+
         nperseg = int(round(window_size * self.resampling_rate / 1e3))
         noverlap = int(round(step_size * self.resampling_rate / 1e3))
 
@@ -73,6 +118,21 @@ class VideoDataSet(Dataset):
         return spec
 
     def _extract_sound_feature(self, idx):
+        """
+        Helper function to create 2D audio spectogram from 1D audio sample
+
+        Args
+        ----------
+        idx: int
+            Center index of sound sample
+        
+        Returns
+        ----------
+        spec: np.ndarray
+            Array of audio spectrogram
+
+        """
+
         centre_sec = idx / self.vid_fps
         left_sec = centre_sec - 0.639
         right_sec = centre_sec + 0.639
@@ -93,6 +153,16 @@ class VideoDataSet(Dataset):
         return self._log_specgram(samples)
 
     def _read_audio_sample(self):
+        """
+        Helper function to read audio sample from raw wav or pickle file
+        
+        Returns
+        ----------
+        sample: np.ndarray
+            Array of 1D audio sample
+
+        """
+
         if self.use_audio_pickle:
             # Read from numpy file
             npy_file = os.path.join(self.aud_path, "{}.npy".format(self.vid_id))
@@ -115,6 +185,23 @@ class VideoDataSet(Dataset):
         return sample
 
     def _load_data(self, modality, idx):
+        """
+        Helper function to load images or get spectrogram for an index
+
+        Args
+        ----------
+        modality: str
+            Input modality to process
+        idx: int
+            Index of the frame to be read
+        
+        Returns
+        ----------
+        img/spec: list
+            List of array(s) containing the image or spectrogram
+
+        """
+
         if modality == "RGB":
             img = Image.open(
                 os.path.join(self.rgb_path, self.rgb_fmt.format(idx))
@@ -133,6 +220,20 @@ class VideoDataSet(Dataset):
             return [Image.fromarray(spec)]
 
     def __getitem__(self, index):
+        """
+        Retrieve input data for a specified index
+
+        Args
+        ----------
+        index: int
+            Index of the dataset to be processed
+
+        Returns
+        ----------
+        input: dict
+            Dictionary of input data containing rgb frame index and images/spectogram
+
+        """
 
         input = {}
         frame_idx = self.frame_indices[index]
@@ -146,6 +247,22 @@ class VideoDataSet(Dataset):
         return input
 
     def get(self, modality, frame_idx):
+        """
+        Helper function to get the transformed input data
+
+        Args
+        ----------
+        modality: str
+            Input modality to process
+        frame_idx: int
+            Index of the frame to be read
+        
+        Returns
+        ----------
+        imgages: list
+            List of array(s) containing the image or spectrogram
+
+        """
 
         images = list()
 

@@ -1,3 +1,6 @@
+# Source: https://github.com/ekazakos/temporal-binding-network
+# Modified for feature extraction
+
 import torchvision
 import random
 from PIL import Image, ImageOps

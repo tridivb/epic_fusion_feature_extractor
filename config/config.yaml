@@ -1,27 +1,37 @@
 # Dataset Parameters
 DATA:
-  ROOT_DIR: "/media/data/tridiv/epic"
-  RGB_DIR_PREFIX: "symlinks"
-  FLOW_DIR_PREFIX: "symlinks"
-  AUDIO_DIR_PREFIX: "audio"
+  # Root directory of dataset
+  ROOT_DIR: "<absolute/path/to/dataset/root>"
+  RGB_DIR_PREFIX: "<prefix/to/rgb/frames>"
+  FLOW_DIR_PREFIX: "<prefix/to/flow/frames>"
+  AUDIO_DIR_PREFIX: "<prefix/to/audio/files>"
+  # Currently only supports multimodal feature extraction (Don't change)
   MODALITY: ["RGB", "Flow", "Spec"]
+  # Input video/rgb fps
   VID_FPS: 60
+  # Fps of extracted flow frames
   FLOW_FPS: 30
+  # Desired output feature fps 
   OUT_FPS: 10
   RGB_FILE_FMT: "img_{:010d}.jpg"
   FLOW_FILE_FMT: "{}_{:010d}.jpg"
   AUDIO_FILE_FMT: "{}.wav"
+  # Number of consecutive flow files to interleave
   FLOW_WIN_LENGTH: 5
+  # Audio sampling rate
   SAMPLING_RATE: 24000
   AUDIO_LENGTH: 1.279
-  TEST_SCALE_SIZE: 256
-  TEST_CROP_SIZE: 224
-  VID_LIST: "/media/data/tridiv/epic/vid_list_mini.txt"
-  OUT_DIR: "/media/data/tridiv/epic/features"
+  # List of videos to process
+  VID_LIST: "absolute/path/to/video/list/file.txt"
+  # Output directory
+  OUT_DIR: "absolute/path/to/output/dir"
 # Model Parameters
 MODEL:
+  # Only supports BNInception for now
   ARCH: "BNInception"
+  # List of classes. Default one is for epic fusion dataset
   NUM_CLASSES: [125, 352]
-  CHECKPOINT: "/media/data/tridiv/epic_fusion_feature_extractor/weights/model_best.pth"
+  # Pretrained model weights
+  CHECKPOINT: "path/to/repo/epic_fusion_feature_extractor/weights/model_best.pth"
 # Misc
 NUM_WORKERS: 8
