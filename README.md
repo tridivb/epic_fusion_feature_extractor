@@ -1,6 +1,6 @@
-# Epic Fusion Feature Extractor
+# EPIC-Fusion Feature Extractor
 
-Extract features from videos with a pre-trained Epic Fusion (Temporal Binding) Model. The original project page can be found here, [EPIC-Fusion](https://ekazakos.github.io/TBN/) along with the paper. The code was built on top of the one provided by the authors. The github repo is, [EPIC-Fusion Code](https://github.com/ekazakos/temporal-binding-network)
+Extract features from videos with a pre-trained EPIC-Fusion (Temporal Binding) Model. The original project page can be found [here (EPIC-Fusion)](https://ekazakos.github.io/TBN/) along with the paper. The code was built on top of the one provided by the authors. The original code can be found at [EPIC-Fusion Code](https://github.com/ekazakos/temporal-binding-network)
 
 ## Getting Started
 
@@ -185,7 +185,7 @@ Since the features are saved as torch tensors, they are by default gpu tensors. 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\
 \
-Please note, the original Epic-Fusion framework is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. Please respect the original licenses as well.
+Please note, the original EPIC-Fusion framework is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. Please respect the original licenses as well.
 
 ## Acknowledgments
 
