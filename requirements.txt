@@ -2,7 +2,7 @@ torch>=1.1.0
 torchvision>=0.3.0
 numpy>=1.18.0
 parse>=1.14.0
-omegaconf>=1.4.1
+omegaconf==1.4.1
 tqdm>=4.41.1
 Pillow==6.2.1
 librosa==0.7.1

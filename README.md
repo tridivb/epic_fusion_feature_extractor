@@ -14,7 +14,7 @@ git clone https://github.com/tridivb/epic_fusion_feature_extractor.git
 
 Python >= 3.6\
 [Pytorch](https://pytorch.org/)  >= 1.1\
-[OmegaConf](https://github.com/omry/omegaconf) \
+[OmegaConf](https://github.com/omry/omegaconf) == 1.4.1\
 [Numpy](https://numpy.org/) \
 [Tqdm](https://github.com/tqdm/tqdm) \
 [PIL](https://pillow.readthedocs.io/en/stable/) \
